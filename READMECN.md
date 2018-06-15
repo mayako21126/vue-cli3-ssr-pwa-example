@@ -1,3 +1,4 @@
+[English](README.md)
 # 为了在多平台保持兼容性，采用rename-files模块对文件进行处理，使用前请先安装rename-files模块
 
 ## 在vue-cli 3的基础上对ssr进行了支持，具体配置在vue.config.js

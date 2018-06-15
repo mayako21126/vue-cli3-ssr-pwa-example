@@ -1,3 +1,4 @@
+[中文](READMECN.md)
 # In order to maintain compatibility on multiple platforms, use the rename-files module to process files. Please install the rename-files module before use.
 
 ## Supported SSR based on vue-cli 3, specifically configured in vue.config.js
