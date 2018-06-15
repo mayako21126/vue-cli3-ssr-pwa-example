@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <div class="c3"></div>
+    <div class="c4"></div>
     <h1>{{ msg }}</h1>
     <p>
       For guide and recipes on how to configure / customize this project,<br> check out the
@@ -67,10 +69,33 @@ export default {
 :root {
     --mainColor: #d7e6bd78;
 }
-
+.c3 {
+    background: url('../assets/3.png');
+    width: 400px;
+    height: 400px;
+}
+.c4 {
+    background: url('../assets/4.png');
+    width: 400px;
+    height: 400px;
+}
 body {
     color: var(--mainColor);
     font-family: system-ui;
     overflow-wrap: break-word;
+}
+h3 {
+    margin: 40px 0 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+a {
+    color: #42b983;
 }
 </style>

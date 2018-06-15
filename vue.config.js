@@ -77,6 +77,7 @@ module.exports = {
     //     }
     // },
     css: {
+        modules: true,
         loaderOptions: {
             css: {
                 // options here will be passed to css-loader
@@ -84,7 +85,29 @@ module.exports = {
             postcss: {
                 plugins: [
                     require('autoprefixer')(),
-                    require('postcss-preset-env')()
+                    require('postcss-import')(),
+                    require('postcss-aspect-ratio-mini')(),
+                    require('postcss-write-svg')({
+                        utf8: false
+                    }),
+                    require('postcss-px-to-viewport')({
+                        viewportWidth: 750,
+                        viewportHeight: 1334,
+                        unitPrecision: 3,
+                        viewportUnit: 'vw',
+                        selectorBlackList: ['.ignore', '.hairlines'],
+                        minPixelValue: 1,
+                        mediaQuery: false
+                    }),
+                    require('postcss-assets')(),
+                    require('postcss-sprites')({
+                        // stylesheetPath: './',
+                        retina: true,
+                        outputDimensions: true
+                    }),
+                    require('postcss-preset-env')(),
+                    require('postcss-bem')({ style: 'bem' }),
+                    require('postcss-nested')()
                 ]
                 // options here will be passed to postcss-loader
             }
