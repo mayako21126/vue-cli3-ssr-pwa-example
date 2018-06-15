@@ -1,0 +1,48 @@
+{
+  "name": "dd",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "client":"vue-cli-service serve",
+    "serve": "npm run build && node server/serve",
+    "build": "npm run build:server && rename-files ./dist vue-ssr-server-bundle.json ../bundle && npm run build:client && rename-files ./ bundle ./dist/vue-ssr-server-bundle.json",
+    "build:client": "vue-cli-service build",
+    "build:server": "cross-env WEBPACK_TARGET=node vue-cli-service build",
+    "start": "cross-env NODE_ENV=production node server/start",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "postcss-load": "^0.1.6",
+    "register-service-worker": "^1.0.0",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
+    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
+    "@vue/cli-plugin-pwa": "^3.0.0-beta.15",
+    "@vue/cli-service": "^3.0.0-beta.15",
+    "@vue/eslint-config-prettier": "^3.0.0-rc.1",
+    "postcss-preset-env": "^5.1.0",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.2",
+    "vue-server-renderer": "^2.5.16",
+    "vue-template-compiler": "^2.5.16",
+    "cross-env": "^5.1.6",
+    "lodash.merge": "^4.6.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "prettier": {
+    "eslintIntegration": true,
+    "stylelintIntegration": true,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "semi": false
+  }
+}
