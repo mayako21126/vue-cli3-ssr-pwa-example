@@ -76,8 +76,9 @@ export default {
 }
 .c4 {
     background: url('../assets/4.png');
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
+    background-color: white;
 }
 body {
     color: var(--mainColor);

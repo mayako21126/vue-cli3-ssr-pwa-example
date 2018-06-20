@@ -95,13 +95,21 @@ module.exports = {
                         viewportHeight: 1334,
                         unitPrecision: 3,
                         viewportUnit: 'vw',
-                        selectorBlackList: ['.ignore', '.hairlines'],
+                        selectorBlackList: [
+                            '.ignore',
+                            '.hairlines',
+                            '.c4',
+                            'c4'
+                        ],
                         minPixelValue: 1,
                         mediaQuery: false
                     }),
                     require('postcss-assets')(),
                     require('postcss-sprites')({
                         // stylesheetPath: './',
+                        verbose: true,
+                        spritePath: './public/img/', //雪碧图合并后存放地址
+                        basePath: './',
                         retina: true,
                         outputDimensions: true
                     }),
