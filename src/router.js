@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from './views/Home.vue'
+import Home from './views/Home.vue'
 // import About from './views/About.vue'
 
 Vue.use(Router)
@@ -11,8 +11,7 @@ export default function() {
             {
                 path: '/',
                 name: 'home',
-                component: () =>
-                    import(/* webpackChunkName: "group-foo" */ './views/Home.vue')
+                component: Home
             },
             {
                 path: '/about',

@@ -3,6 +3,7 @@
 const fs = require('fs')
 const path = require('path')
 const express = require('express')
+const resolve = file => path.resolve(__dirname, file)
 var proxy = require('http-proxy-middleware')
 const { createBundleRenderer } = require('vue-server-renderer')
 
@@ -15,10 +16,19 @@ function createRenderer(bundle, options) {
     return createBundleRenderer(
         bundle,
         Object.assign(options, {
+            // this is only needed when vue-server-renderer is npm-linked
+            basedir: resolve('../dist'),
             runInNewContext: false
         })
     )
 }
+const serve = (path, cache) =>
+    express.static(resolve(path), {
+        maxAge:
+            cache && process.env.NODE_ENV == 'production'
+                ? 1000 * 60 * 60 * 24 * 30
+                : 0
+    })
 
 let renderer
 const templatePath = path.resolve(__dirname, '../src/index.template.html')
@@ -30,7 +40,7 @@ renderer = createRenderer(bundle, {
     template,
     clientManifest
 })
-
+console.log(renderer)
 if (process.env.NODE_ENV !== 'production') {
     app.use(
         '/js/main*',
@@ -65,11 +75,19 @@ if (process.env.NODE_ENV !== 'production') {
 app.use('/js', express.static(path.resolve(__dirname, '../dist/js')))
 app.use('/css', express.static(path.resolve(__dirname, '../dist/css')))
 app.use('/img', express.static(path.resolve(__dirname, '../dist/img')))
-app.use('*', express.static(path.resolve(__dirname, '../dist/')))
-app.use('/', express.static(path.resolve(__dirname, '../dist/')))
-app.get('*', (req, res) => {
+// app.use('*', express.static(path.resolve(__dirname, '../dist')))
+app.use('/', express.static(path.resolve(__dirname, '../dist')))
+app.use('/dist', serve('../dist', true))
+app.use('/public', serve('../public', true))
+app.use('/manifest.json', serve('../dist/manifest.json', true))
+app.use('/service-worker.js', serve('../dist/service-worker.js'))
+// app.use(
+//     '/service-worker.js',
+//     express.static(path.resolve(__dirname, '../dist/service-worker.js'))
+// )
+app.get('/', (req, res) => {
     res.setHeader('Content-Type', 'text/html')
-
+    console.log('33')
     const context = {
         title: 'Vue HN 2.0', // default title
         url: req.url

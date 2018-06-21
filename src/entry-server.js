@@ -21,6 +21,7 @@ export default context => {
             Promise.all(
                 matchedComponents.map(Component => {
                     if (Component.asyncData) {
+                        console.log('33')
                         return Component.asyncData({
                             store,
                             route: router.currentRoute
