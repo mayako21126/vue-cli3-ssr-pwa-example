@@ -11,6 +11,18 @@ const createApiFile = TARGET_NODE
 
 const target = TARGET_NODE ? 'server' : 'client'
 module.exports = {
+    pwa: {
+        name: 'My App',
+        themeColor: '#4DBA87',
+        msTileColor: '#000000',
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'black',
+        workboxOptions: {
+            // swSrc is required in InjectManifest mode.
+            directoryIndex: 'null'
+            // ...other Workbox options...
+        }
+    },
     configureWebpack: () => ({
         entry: `./src/entry-${target}`,
         target: TARGET_NODE ? 'node' : 'web',
